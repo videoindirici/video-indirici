@@ -6,19 +6,17 @@
     
     <meta name="monetag" content="1be482ca371cd895e00bed15d23f3e72">
 
-    <title>Video İndirici Pro - Ücretsiz Instagram, TikTok, YouTube Video İndir</title>
-    <meta name="description" content="En hızlı ve ücretsiz video indirici. Instagram Reels, TikTok ve YouTube videolarını filigransız, HD kalitede saniyeler içinde indir.">
-    <meta name="keywords" content="video indir, instagram video indir, tiktok video indir, youtube mp4 indir, bedava video indirici, reels indir">
+    <title>Video İndirici Pro - Ücretsiz & Hızlı Video İndirme</title>
+    <meta name="description" content="Instagram, TikTok ve YouTube videolarını ücretsiz ve HD kalitede indir.">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        body { background: #0f0f0f; color: white; padding-top: 50px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #0f0f0f; color: white; padding-top: 50px; font-family: sans-serif; }
         .main-card { background: #1a1a1a; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #333; }
-        .btn-success { background: #28a745; border: none; font-weight: bold; padding: 12px; width: 100%; transition: 0.3s; }
-        .btn-success:hover { background: #218838; transform: scale(1.02); }
-        .ad-space { margin-top: 30px; border: 1px dashed #555; padding: 20px; border-radius: 15px; background: #222; }
+        .btn-success { background: #28a745; border: none; font-weight: bold; padding: 15px; width: 100%; }
         .form-control { background: #2b2b2b; border: 1px solid #444; color: white; padding: 12px; }
         .form-control:focus { background: #333; color: white; border-color: #28a745; box-shadow: none; }
+        .ad-space { margin-top: 30px; border: 1px dashed #555; padding: 20px; border-radius: 15px; background: #222; }
     </style>
 </head>
 <body>
@@ -26,19 +24,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8 text-center main-card">
                 <h1 class="mb-4">🚀 Video İndirici Pro</h1>
-                <p class="text-secondary mb-4">TikTok, Instagram ve YouTube videolarını anında cihazına kaydet.</p>
+                <p class="text-secondary mb-4">TikTok, Instagram ve YouTube linkini yapıştır kanka.</p>
                 
                 <div class="mb-3">
-                    <input id="videoUrl" type="text" class="form-control mb-3" placeholder="Video linkini buraya yapıştır kanka...">
-                    <button class="btn btn-success" onclick="downloadVideo()">VİDEOYU ANALİZ ET VE İNDİR</button>
+                    <input id="videoUrl" type="text" class="form-control mb-3" placeholder="Link buraya...">
+                    <button class="btn btn-success" onclick="downloadVideo()">VİDEOYU ANALİZ ET</button>
                 </div>
 
                 <div id="status" class="mt-4"></div>
 
                 <div class="ad-space">
-                    <h5 class="text-warning">🔥 Destek Ve Abone Ol</h5>
-                    <p class="small text-secondary">En yeni içeriklerimizi kaçırmamak için ana kanalımıza göz at!</p>
-                    <a href="https://youtube.com/@KANALIN" target="_blank" class="btn btn-outline-danger btn-sm">Kanalı Ziyaret Et</a>
+                    <h5 class="text-warning">🔥 Kanallarımıza Abone Ol</h5>
+                    <p class="small text-secondary">Yeni videoları kaçırmamak için tıkla!</p>
+                    <a href="https://youtube.com" target="_blank" class="btn btn-outline-danger btn-sm">Kanalı Gör</a>
                 </div>
             </div>
         </div>
@@ -48,9 +46,9 @@
     async function downloadVideo() {
         const url = document.getElementById('videoUrl').value;
         const status = document.getElementById('status');
-        if(!url) { alert("Link nerede kanka?"); return; }
+        if(!url) { alert("Link boş kanka!"); return; }
         
-        status.innerHTML = '<div class="spinner-border text-success" role="status"></div><br><span class="mt-2 d-inline-block">Video yakalanıyor...</span>';
+        status.innerHTML = '<div class="spinner-border text-success" role="status"></div><br>Aranıyor...';
 
         const options = {
             method: 'POST',
@@ -66,15 +64,12 @@
             const response = await fetch('https://social-download-all-in-one.p.rapidapi.com/v1/social/autolink', options);
             const result = await response.json();
             if(result && result.url) {
-                status.innerHTML = `
-                    <div class="alert alert-success">Video Hazır!</div>
-                    <a href="${result.url}" class="btn btn-primary btn-lg shadow" target="_blank">📥 ŞİMDİ İNDİR</a>
-                `;
+                status.innerHTML = `<a href="${result.url}" class="btn btn-primary btn-lg mt-2" target="_blank">✅ ŞİMDİ İNDİR</a>`;
             } else {
-                status.innerHTML = '<div class="alert alert-danger">❌ Hata: Link desteklenmiyor veya video bulunamadı.</div>';
+                status.innerHTML = '<div class="alert alert-danger">❌ Hata: Video bulunamadı.</div>';
             }
         } catch (error) {
-            status.innerHTML = '<div class="alert alert-warning">❌ API Hatası veya Bağlantı Sorunu.</div>';
+            status.innerHTML = '<div class="alert alert-warning">❌ Bağlantı hatası oluştu.</div>';
         }
     }
     </script>
