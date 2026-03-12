@@ -1,34 +1,70 @@
-<script>
-async function downloadVideo() {
-    const url = document.getElementById('videoUrl').value;
-    const status = document.getElementById('status');
-    
-    if(!url) { alert("Link nerede kanka?"); return; }
-    
-    status.innerText = "🚀 Video analiz ediliyor, lütfen bekle...";
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video İndirme Merkezi - Ücretsiz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #121212; color: white; padding-top: 50px; font-family: sans-serif; }
+        .main-card { background: #1e1e1e; border-radius: 15px; padding: 30px; box-shadow: 0 0 20px rgba(0,255,0,0.1); }
+        .btn-success { background: #28a745; border: none; font-weight: bold; width: 100%; }
+        .ad-space { margin-top: 30px; border: 1px dashed #444; padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center main-card">
+                <h1 class="mb-4">🚀 Video İndirme Pro</h1>
+                <p class="text-secondary">TikTok, Instagram ve YouTube linkini yapıştır kanka.</p>
+                
+                <div class="mb-3">
+                    <input id="videoUrl" type="text" class="form-control mb-2" placeholder="Link buraya...">
+                    <button class="btn btn-success" onclick="downloadVideo()">VİDEOYU ANALİZ ET</button>
+                </div>
 
-    const options = {
-        method: 'POST', // Bu API POST istiyor
-        headers: {
-            'content-type': 'application/json',
-            'x-rapidapi-key': 'a3bf3b87a1msh0c6eeeb83253221p1fc78ajsn7db1a79e4ec5', // Senin resmindeki key
-            'x-rapidapi-host': 'social-download-all-in-one.p.rapidapi.com' // Senin resmindeki host
-        },
-        body: JSON.stringify({ url: url })
-    };
+                <div id="status" class="mt-3"></div>
 
-    try {
-        const response = await fetch('https://social-download-all-in-one.p.rapidapi.com/v1/social/autolink', options);
-        const result = await response.json();
+                <div class="ad-space">
+                    <h5>🔥 Destek Ol</h5>
+                    <p>Kanallarımıza abone olmayı unutma!</p>
+                    <a href="https://youtube.com" target="_blank" class="btn btn-outline-danger btn-sm">Kanalları Gör</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    async function downloadVideo() {
+        const url = document.getElementById('videoUrl').value;
+        const status = document.getElementById('status');
+        if(!url) { alert("Link boş kanka!"); return; }
         
-        // API'den dönen cevaba göre linki veriyoruz
-        if(result && result.url) {
-            status.innerHTML = `<a href="${result.url}" class="btn btn-primary mt-2" target="_blank">✅ VİDEOYU ŞİMDİ İNDİR</a>`;
-        } else {
-            status.innerText = "❌ Hata: Video bulunamadı. Linki kontrol et kanka.";
+        status.innerHTML = '<div class="spinner-border text-success" role="status"></div><br>Aranıyor...';
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'x-rapidapi-key': 'a3bf3b87a1msh0c6eeeb83253221p1fc78ajsn7db1a79e4ec5',
+                'x-rapidapi-host': 'social-download-all-in-one.p.rapidapi.com'
+            },
+            body: JSON.stringify({ url: url })
+        };
+
+        try {
+            const response = await fetch('https://social-download-all-in-one.p.rapidapi.com/v1/social/autolink', options);
+            const result = await response.json();
+            if(result && result.url) {
+                status.innerHTML = `<a href="${result.url}" class="btn btn-primary mt-2" target="_blank">✅ ŞİMDİ İNDİR (VİDEO)</a>`;
+            } else {
+                status.innerText = "❌ Hata: Video bulunamadı. Linki kontrol et.";
+            }
+        } catch (error) {
+            status.innerText = "❌ API Hatası! Limit dolmuş olabilir.";
         }
-    } catch (error) {
-        status.innerText = "❌ API bağlantı hatası! Günlük limit dolmuş olabilir.";
     }
-}
-</script>
+    </script>
+</body>
+</html>
