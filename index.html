@@ -6,6 +6,8 @@
     
     <meta name="monetag" content="1be482ca371cd895e00bed15d23f3e72">
 
+    <script src="https://quge5.com/88/tag.min.js" data-zone="219098" async data-cfasync="false"></script>
+
     <title>Video İndirici Pro - Ücretsiz & Hızlı Video İndirme</title>
     <meta name="description" content="Instagram, TikTok ve YouTube videolarını ücretsiz ve HD kalitede indir.">
     
@@ -28,7 +30,7 @@
                 
                 <div class="mb-3">
                     <input id="videoUrl" type="text" class="form-control mb-3" placeholder="Link buraya...">
-                    <button class="btn btn-success" onclick="downloadVideo()">VİDEOYU ANALİZ ET</button>
+                    <button class="btn btn-success" onclick="downloadVideo()">VİDEOYU ANALİZ ET VE İNDİR</button>
                 </div>
 
                 <div id="status" class="mt-4"></div>
@@ -69,7 +71,7 @@
                 status.innerHTML = '<div class="alert alert-danger">❌ Hata: Video bulunamadı.</div>';
             }
         } catch (error) {
-            status.innerHTML = '<div class="alert alert-warning">❌ Bağlantı hatası oluştu.</div>';
+            status.innerHTML = '<div class="alert alert-warning">❌ API Limiti veya Bağlantı Hatası.</div>';
         }
     }
     </script>
